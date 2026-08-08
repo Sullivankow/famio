@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import type { AppColors } from '../../theme/ThemeContext';
-import type { Comment, Post } from '../../types/home';
+import type { Post } from '../../types/home';
+
+type PostComment = Post['commentList'][number];
 
 type PostCardProps = Readonly<{
     post: Post;
@@ -41,7 +43,7 @@ export function PostCard({ post, colors, onToggleLike, onReact, onDelete, onAddC
         setShowComments(true);
     }
 
-    function handleStartEdit(comment: Comment) {
+    function handleStartEdit(comment: PostComment) {
         setEditingCommentId(comment.id);
         setCommentDraft(comment.text);
         setShowComments(true);
