@@ -24,7 +24,7 @@ export function SignUpScreen() {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  const isEmailValid = /^\S+@\S+\.\S+$/.test(email);
+  const isEmailValid = /^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+$/.test(email);
   const isPasswordValid = password.length >= 8;
   const passwordsMatch = password === passwordConfirmation;
   const isFormValid = firstName.trim().length > 0 && isEmailValid && isPasswordValid && passwordsMatch;
@@ -117,7 +117,7 @@ export function SignUpScreen() {
             <Text style={styles.buttonArrow}>→</Text>
           </Pressable>
 
-          {hasSubmitted && isFormValid && (
+          {Boolean(hasSubmitted && isFormValid) && (
             <Text style={styles.readyMessage}>
               Tout est prêt. La création du compte sera connectée au service d’authentification à l’étape suivante.
             </Text>
@@ -156,7 +156,7 @@ function Field({ error, label, styles, ...inputProps }: FieldProps) {
         style={[styles.input, error && styles.inputError]}
         {...inputProps}
       />
-      {error && <Text style={styles.errorText}>{error}</Text>}
+      {Boolean(error) && <Text style={styles.errorText}>{error}</Text>}
     </View>
   );
 }

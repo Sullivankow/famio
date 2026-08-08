@@ -22,7 +22,7 @@ export function ForgotPasswordScreen() {
   const [email, setEmail] = useState('');
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
-  const isEmailValid = /^\S+@\S+\.\S+$/.test(email);
+  const isEmailValid = /^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+$/.test(email);
 
   /** Valide l’adresse saisie et affiche la confirmation d’envoi lorsque celle-ci est correcte. */
   function handleResetRequest() {
@@ -105,7 +105,7 @@ export function ForgotPasswordScreen() {
                   style={[styles.input, hasSubmitted && !isEmailValid && styles.inputError]}
                   value={email}
                 />
-                {hasSubmitted && !isEmailValid && (
+                {Boolean(hasSubmitted && !isEmailValid) && (
                   <Text style={styles.errorText}>Saisissez une adresse e-mail valide.</Text>
                 )}
               </View>
