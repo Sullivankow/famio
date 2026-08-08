@@ -6,7 +6,7 @@ import { SignUpScreen } from '../screens/SignUpScreen';
 import { SignInScreen } from '../screens/SignInScreen';
 import { ForgotPasswordScreen } from '../screens/ForgotPasswordScreen';
 import { ResetPasswordScreen } from '../screens/ResetPasswordScreen';
-import { HomeScreen } from '../screens/HomeScreen';
+import BottomTabs from './BottomTabs';
 import { useAppTheme } from '../theme/ThemeContext';
 
 export type RootStackParamList = {
@@ -50,7 +50,7 @@ export function AppNavigator() {
         <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Home" component={BottomTabs} />
       </Stack.Navigator>
     </NavigationContainer>
   );
