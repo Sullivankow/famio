@@ -1,10 +1,14 @@
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import type { RootStackParamList } from '../navigation/AppNavigator';
 import { type AppColors, useAppTheme } from '../theme/ThemeContext';
 
 export function WelcomeScreen() {
   const { theme } = useAppTheme();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const styles = createStyles(theme.colors);
 
   return (
@@ -50,8 +54,10 @@ export function WelcomeScreen() {
         </View>
 
         <View style={styles.actions}>
-          {/* Ces actions seront reliées aux écrans d'inscription et de connexion au prochain écran. */}
-          <Pressable style={({ pressed }) => [styles.primaryButton, pressed && styles.primaryButtonPressed]}>
+          <Pressable
+            onPress={() => navigation.navigate('SignUp')}
+            style={({ pressed }) => [styles.primaryButton, pressed && styles.primaryButtonPressed]}
+          >
             <Text style={styles.primaryButtonText}>Créer mon espace familial</Text>
             <Text style={styles.buttonArrow}>→</Text>
           </Pressable>
