@@ -89,7 +89,11 @@ export function SignInScreen() {
             />
           </View>
 
-          <Pressable accessibilityRole="button" style={styles.forgotButton}>
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => navigation.navigate('ForgotPassword')}
+            style={styles.forgotButton}
+          >
             <Text style={styles.forgotButtonText}>Mot de passe oublié ?</Text>
           </Pressable>
 
