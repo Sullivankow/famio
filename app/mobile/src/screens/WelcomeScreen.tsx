@@ -68,6 +68,13 @@ export function WelcomeScreen() {
           >
             <Text style={styles.secondaryButtonText}>J'ai déjà un compte</Text>
           </Pressable>
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => navigation.navigate('Home')}
+            style={({ pressed }) => [styles.secondaryButton, pressed && styles.secondaryButtonPressed]}
+          >
+            <Text style={styles.secondaryButtonText}>Voir la home</Text>
+          </Pressable>
           <Text style={styles.reassurance}>Un espace intime, réservé à votre famille.</Text>
         </View>
       </ScrollView>

@@ -6,6 +6,7 @@ import { SignUpScreen } from '../screens/SignUpScreen';
 import { SignInScreen } from '../screens/SignInScreen';
 import { ForgotPasswordScreen } from '../screens/ForgotPasswordScreen';
 import { ResetPasswordScreen } from '../screens/ResetPasswordScreen';
+import { HomeScreen } from '../screens/HomeScreen';
 import { useAppTheme } from '../theme/ThemeContext';
 
 export type RootStackParamList = {
@@ -14,6 +15,7 @@ export type RootStackParamList = {
   SignIn: undefined;
   ForgotPassword: undefined;
   ResetPassword: undefined;
+  Home: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -44,6 +46,7 @@ export function AppNavigator() {
         <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
