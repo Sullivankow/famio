@@ -52,6 +52,7 @@ export function HomeScreen() {
             imageLabel: hasPhoto ? 'Photo ajoutée' : 'Publication textuelle',
             likes: 0,
             comments: 0,
+            commentList: [],
             isLiked: false,
         };
 
@@ -83,6 +84,61 @@ export function HomeScreen() {
      */
     function handleDelete(postId: string) {
         setPosts((currentPosts) => currentPosts.filter((post) => post.id !== postId));
+    }
+
+    /**
+     * Ajoute un commentaire à une publication et met à jour le compteur associé.
+     */
+    function handleAddComment(postId: string, text: string) {
+        setPosts((currentPosts) =>
+            currentPosts.map((post) =>
+                post.id === postId
+                    ? {
+                        ...post,
+                        commentList: [
+                            ...post.commentList,
+                            { id: `comment-${Date.now()}`, author: 'Moi', text, isMine: true },
+                        ],
+                        comments: post.commentList.length + 1,
+                    }
+                    : post,
+            ),
+        );
+    }
+
+    /**
+     * Modifie un commentaire déjà publié par l’utilisateur.
+     */
+    function handleEditComment(postId: string, commentId: string, text: string) {
+        setPosts((currentPosts) =>
+            currentPosts.map((post) =>
+                post.id === postId
+                    ? {
+                        ...post,
+                        commentList: post.commentList.map((comment) =>
+                            comment.id === commentId ? { ...comment, text } : comment,
+                        ),
+                    }
+                    : post,
+            ),
+        );
+    }
+
+    /**
+     * Supprime un commentaire du tableau d’une publication.
+     */
+    function handleDeleteComment(postId: string, commentId: string) {
+        setPosts((currentPosts) =>
+            currentPosts.map((post) =>
+                post.id === postId
+                    ? {
+                        ...post,
+                        commentList: post.commentList.filter((comment) => comment.id !== commentId),
+                        comments: post.commentList.filter((comment) => comment.id !== commentId).length,
+                    }
+                    : post,
+            ),
+        );
     }
 
     /**
@@ -147,7 +203,10 @@ export function HomeScreen() {
                         key={post.id}
                         post={post}
                         colors={theme.colors}
+                        onAddComment={handleAddComment}
                         onDelete={handleDelete}
+                        onDeleteComment={handleDeleteComment}
+                        onEditComment={handleEditComment}
                         onReact={handleReact}
                         onToggleLike={handleToggleLike}
                     />

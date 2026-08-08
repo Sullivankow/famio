@@ -16,7 +16,12 @@ export const mockPosts: Post[] = [
     content: 'Un moment simple et précieux à la maison avec les enfants. Le bonheur est parfois dans les petits détails.',
     imageLabel: 'Repas familial en plein air',
     likes: 24,
-    comments: 5,
+    comments: 3,
+    commentList: [
+      { id: 'comment-1', author: 'Maman', text: 'J’adore ce moment de partage.', isMine: false },
+      { id: 'comment-2', author: 'Léo', text: 'Très belle idée !', isMine: false },
+      { id: 'comment-3', author: 'Moi', text: 'On devrait refaire ça samedi.', isMine: true },
+    ],
     isLiked: false,
   },
   {
@@ -26,7 +31,11 @@ export const mockPosts: Post[] = [
     content: 'Nouveau dessin pour la galerie familiale. J’ai hâte que tout le monde le voit.',
     imageLabel: 'Dessin coloré',
     likes: 31,
-    comments: 8,
+    comments: 2,
+    commentList: [
+      { id: 'comment-4', author: 'Nora', text: 'Il est magnifique !', isMine: false },
+      { id: 'comment-5', author: 'Moi', text: 'Tu peux l’ajouter à la galerie.', isMine: true },
+    ],
     isLiked: true,
   },
 ];

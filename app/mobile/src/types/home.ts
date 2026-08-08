@@ -5,6 +5,13 @@ export type Story = {
   isNew?: boolean;
 };
 
+export type Comment = {
+  id: string;
+  author: string;
+  text: string;
+  isMine?: boolean;
+};
+
 export type Post = {
   id: string;
   author: string;
@@ -13,5 +20,6 @@ export type Post = {
   imageLabel: string;
   likes: number;
   comments: number;
+  commentList: Comment[];
   isLiked?: boolean;
 };
