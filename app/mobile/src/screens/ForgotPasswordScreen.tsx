@@ -10,14 +10,16 @@ import {
   View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import type { RootStackParamList } from '../navigation/AppNavigator';
 import { type AppColors, useAppTheme } from '../theme/ThemeContext';
 
 /** Affiche la demande de réinitialisation du mot de passe. */
 export function ForgotPasswordScreen() {
   const { theme } = useAppTheme();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const styles = createStyles(theme.colors);
   const [email, setEmail] = useState('');
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -37,6 +39,11 @@ export function ForgotPasswordScreen() {
   function handleUseAnotherEmail() {
     setHasSubmitted(false);
     setIsEmailSent(false);
+  }
+
+  /** Ouvre la page de réinitialisation habituellement atteinte par le lien reçu par e-mail. */
+  function handleOpenDemo() {
+    navigation.navigate('ResetPassword');
   }
 
   return (
@@ -83,6 +90,14 @@ export function ForgotPasswordScreen() {
               <Pressable accessibilityRole="button" onPress={handleUseAnotherEmail} style={styles.textButton}>
                 <Text style={styles.textButtonText}>Utiliser une autre adresse</Text>
               </Pressable>
+              <Pressable
+                accessibilityHint="Ouvre la page normalement accessible depuis l'e-mail reçu"
+                accessibilityRole="button"
+                onPress={handleOpenDemo}
+                style={styles.demoButton}
+              >
+                <Text style={styles.demoButtonText}>Démo : ouvrir le lien reçu</Text>
+              </Pressable>
             </View>
           ) : (
             <View>
@@ -127,6 +142,14 @@ export function ForgotPasswordScreen() {
               <Text style={styles.reassurance}>
                 Pour votre sécurité, nous ne confirmons pas l’existence d’un compte associé à cette adresse.
               </Text>
+              <Pressable
+                accessibilityHint="Ouvre directement la page de création du nouveau mot de passe"
+                accessibilityRole="button"
+                onPress={handleOpenDemo}
+                style={styles.demoButton}
+              >
+                <Text style={styles.demoButtonText}>Démo : ouvrir la page de réinitialisation</Text>
+              </Pressable>
             </View>
           )}
         </ScrollView>
@@ -166,5 +189,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   buttonArrow: { color: colors.onPrimary, fontSize: 21, fontWeight: '600' },
   textButton: { marginTop: 19, paddingVertical: 6 },
   textButtonText: { color: colors.primaryPressed, fontSize: 14, fontWeight: '800' },
+  demoButton: { marginTop: 24, paddingTop: 18, borderTopWidth: 1, borderTopColor: colors.border },
+  demoButtonText: { color: colors.textSecondary, fontSize: 12, fontWeight: '700', textAlign: 'center', textDecorationLine: 'underline' },
   reassurance: { marginTop: 20, paddingHorizontal: 10, color: colors.textSecondary, fontSize: 12, lineHeight: 18, textAlign: 'center' },
 });
