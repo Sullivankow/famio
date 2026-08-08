@@ -38,4 +38,31 @@ export const mockPosts: Post[] = [
     ],
     isLiked: true,
   },
+    {
+    id: 'post-3',
+    author: 'Izie',
+    time: 'Il y a 1 h',
+    content: 'J\'ai chié un gros parpin ce matin ',
+    imageLabel: 'Dessin coloré',
+    likes: 31,
+    comments: 2,
+    commentList: [
+      { id: 'comment-4', author: 'Nora', text: 'Il est magnifique !', isMine: false },
+      { id: 'comment-5', author: 'Moi', text: 'Tu peux l’ajouter à la galerie.', isMine: true },
+    ],
+    isLiked: true,
+  },  {
+    id: 'post-4',
+    author: 'Kloé',
+    time: 'Il y a 1 h',
+    content: 'Izie arrête de larguer',
+    imageLabel: 'Dessin coloré',
+    likes: 31,
+    comments: 2,
+    commentList: [
+      { id: 'comment-4', author: 'Nora', text: 'Il est magnifique !', isMine: false },
+      { id: 'comment-5', author: 'Moi', text: 'Tu peux l’ajouter à la galerie.', isMine: true },
+    ],
+    isLiked: true,
+  },
 ];
