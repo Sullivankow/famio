@@ -56,7 +56,7 @@ export function HomeScreen() {
             comments: 0,
             commentList: [],
             isLiked: false,
-        };
+        } satisfies import('../types/home').Post;
 
         setPosts((currentPosts) => [newPost, ...currentPosts]);
         setDraftText('');
