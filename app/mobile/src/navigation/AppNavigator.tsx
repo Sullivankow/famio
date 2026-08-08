@@ -3,11 +3,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { WelcomeScreen } from '../screens/WelcomeScreen';
 import { SignUpScreen } from '../screens/SignUpScreen';
+import { SignInScreen } from '../screens/SignInScreen';
 import { useAppTheme } from '../theme/ThemeContext';
 
 export type RootStackParamList = {
   Welcome: undefined;
   SignUp: undefined;
+  SignIn: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -35,6 +37,7 @@ export function AppNavigator() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="SignIn" component={SignInScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

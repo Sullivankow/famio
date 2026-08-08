@@ -61,7 +61,11 @@ export function WelcomeScreen() {
             <Text style={styles.primaryButtonText}>Créer mon espace familial</Text>
             <Text style={styles.buttonArrow}>→</Text>
           </Pressable>
-          <Pressable style={({ pressed }) => [styles.secondaryButton, pressed && styles.secondaryButtonPressed]}>
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => navigation.navigate('SignIn')}
+            style={({ pressed }) => [styles.secondaryButton, pressed && styles.secondaryButtonPressed]}
+          >
             <Text style={styles.secondaryButtonText}>J'ai déjà un compte</Text>
           </Pressable>
           <Text style={styles.reassurance}>Un espace intime, réservé à votre famille.</Text>
