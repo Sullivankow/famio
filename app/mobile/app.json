@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "Famio",
+    "slug": "famio",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "famio",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#FFF8F4"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.famio.mobile"
+    },
+    "android": {
+      "package": "com.famio.mobile"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "famio",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.14.0",
+  "scripts": {
+    "mobile": "pnpm --filter @famio/mobile start",
+    "mobile:android": "pnpm --filter @famio/mobile android",
+    "mobile:ios": "pnpm --filter @famio/mobile ios"
+  }
+}
