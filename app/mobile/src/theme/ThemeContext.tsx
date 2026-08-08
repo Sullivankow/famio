@@ -1,9 +1,12 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
 import { useColorScheme } from 'react-native';
 
+// Mode effectivement appliqué à l'interface.
 export type ThemeMode = 'light' | 'dark';
+// Choix mémorisable de l'utilisateur : suivre l'appareil ou imposer un mode.
 export type ThemePreference = ThemeMode | 'system';
 
+// Tokens sémantiques utilisés dans les écrans, afin d'éviter les couleurs écrites en dur.
 export type AppColors = {
   background: string;
   surface: string;
@@ -25,12 +28,14 @@ export type AppTheme = {
   colors: AppColors;
 };
 
+// Valeur exposée à tous les composants qui consomment le thème.
 type ThemeContextValue = {
   theme: AppTheme;
   preference: ThemePreference;
   setPreference: (preference: ThemePreference) => void;
 };
 
+// Palette par défaut de Famio pour les interfaces claires.
 const lightTheme: AppTheme = {
   mode: 'light',
   colors: {
@@ -50,6 +55,7 @@ const lightTheme: AppTheme = {
   },
 };
 
+// Équivalent sombre de la palette claire, prêt à être activé par le système ou les réglages.
 const darkTheme: AppTheme = {
   mode: 'dark',
   colors: {
@@ -69,13 +75,17 @@ const darkTheme: AppTheme = {
   },
 };
 
+// Le contexte est volontairement nul hors du fournisseur afin de détecter une mauvaise utilisation.
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export function ThemeProvider({ children }: Readonly<{ children: ReactNode }>) {
+  // useColorScheme réagit aux changements de réglage clair/sombre de l'appareil.
   const systemMode = useColorScheme() === 'dark' ? 'dark' : 'light';
+  // La préférence pourra être pilotée plus tard depuis un écran de réglages.
   const [preference, setPreference] = useState<ThemePreference>('system');
   const mode = preference === 'system' ? systemMode : preference;
   const theme = mode === 'dark' ? darkTheme : lightTheme;
+  // La valeur mémorisée évite de redéclencher inutilement les composants consommateurs.
   const value = useMemo(
     () => ({ theme, preference, setPreference }),
     [preference, theme],
@@ -84,6 +94,7 @@ export function ThemeProvider({ children }: Readonly<{ children: ReactNode }>) {
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
+// Point d'accès unique au thème dans les écrans et composants de l'application.
 export function useAppTheme() {
   const context = useContext(ThemeContext);
 

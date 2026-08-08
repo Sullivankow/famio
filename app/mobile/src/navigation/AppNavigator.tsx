@@ -12,7 +12,9 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function AppNavigator() {
   const { theme } = useAppTheme();
+  // On conserve les valeurs par défaut de React Navigation adaptées au mode actif.
   const baseTheme = theme.mode === 'dark' ? DarkTheme : DefaultTheme;
+  // Les couleurs de navigation sont ensuite remplacées par les tokens de Famio.
   const navigationTheme = {
     ...baseTheme,
     colors: {

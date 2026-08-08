@@ -5,12 +5,14 @@ import { type AppColors, useAppTheme } from '../theme/ThemeContext';
 
 export function WelcomeScreen() {
   const { theme } = useAppTheme();
+  // Les styles sont créés avec le thème courant pour suivre automatiquement le mode clair/sombre.
   const styles = createStyles(theme.colors);
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
       <View style={styles.container}>
         <View style={styles.logo} accessibilityRole="image" accessibilityLabel="Famio">
+          {/* Le logo représente deux adultes et un enfant, sans reprendre une lettre ou un logo existant. */}
           <View style={[styles.person, styles.personLeft]}>
             <View style={styles.adultHead} />
             <View style={styles.adultBody} />
@@ -34,6 +36,7 @@ export function WelcomeScreen() {
   );
 }
 
+// Les couleurs proviennent exclusivement des tokens globaux du thème.
 const createStyles = (colors: AppColors) => StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -59,6 +62,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
     elevation: 6
   },
   person: {
+    // Les silhouettes sont superposées dans le carré corail du logo.
     position: 'absolute',
     alignItems: 'center',
   },
