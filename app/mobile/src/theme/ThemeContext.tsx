@@ -71,7 +71,7 @@ const darkTheme: AppTheme = {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
+export function ThemeProvider({ children }: Readonly<{ children: ReactNode }>) {
   const systemMode = useColorScheme() === 'dark' ? 'dark' : 'light';
   const [preference, setPreference] = useState<ThemePreference>('system');
   const mode = preference === 'system' ? systemMode : preference;
