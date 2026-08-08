@@ -6,6 +6,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import type { RootStackParamList } from '../navigation/AppNavigator';
 import { type AppColors, useAppTheme } from '../theme/ThemeContext';
 
+/**
+ * Affiche l’écran de lancement de l’application avec la présentation de Famio et les actions d’entrée.
+ */
 export function WelcomeScreen() {
   const { theme } = useAppTheme();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -84,6 +87,9 @@ export function WelcomeScreen() {
 
 type ScreenStyles = ReturnType<typeof createStyles>;
 
+/**
+ * Dessine un petit marqueur visuel représentant une famille pour l’illustration de l’écran d’accueil.
+ */
 function FamilyMark({ large = false, styles }: Readonly<{ large?: boolean; styles: ScreenStyles }>) {
   return (
     <View style={large ? styles.familyMarkLarge : styles.familyMark} accessibilityElementsHidden>

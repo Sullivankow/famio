@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
+import { BurgerMenu } from '../components/home/BurgerMenu';
 import { CreatePostComposer } from '../components/home/CreatePostComposer';
 import { StoriesSection } from '../components/home/StoriesSection';
 import { PostCard } from '../components/home/PostCard';
@@ -19,6 +20,7 @@ export function HomeScreen() {
     const [composerOpen, setComposerOpen] = useState(false);
     const [draftText, setDraftText] = useState('');
     const [hasPhoto, setHasPhoto] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     /**
      * Bascule l’état du composeur de publication pour afficher ou cacher le formulaire.
@@ -167,18 +169,40 @@ export function HomeScreen() {
         }
     }
 
+    function handleOpenProfile() {
+        setMenuOpen(false);
+        console.log('Ouverture du profil utilisateur');
+    }
+
+    function handleOpenSettings() {
+        setMenuOpen(false);
+        console.log('Ouverture des paramètres');
+    }
+
     return (
         <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
             <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
-                    <View>
+                    <View style={styles.appBlock}>
                         <Text style={[styles.eyebrow, { color: theme.colors.primaryPressed }]}>FAMIO</Text>
                         <Text style={[styles.title, { color: theme.colors.textPrimary }]}>Bienvenue chez toi</Text>
                     </View>
-                    <Pressable onPress={() => navigation.goBack()} style={[styles.backButton, { borderColor: theme.colors.border }]}>
-                        <Text style={[styles.backButtonText, { color: theme.colors.textPrimary }]}>←</Text>
-                    </Pressable>
+
+                    <View style={styles.headerActions}>
+                        <Pressable onPress={() => setMenuOpen(true)} style={[styles.iconButton, { borderColor: theme.colors.border }]}>
+                            <Text style={[styles.iconButtonText, { color: theme.colors.textPrimary }]}>☰</Text>
+                        </Pressable>
+                    </View>
                 </View>
+
+                <BurgerMenu
+                    colors={theme.colors}
+                    onClose={() => setMenuOpen(false)}
+                    onGoBack={() => navigation.goBack()}
+                    onOpenProfile={handleOpenProfile}
+                    onOpenSettings={handleOpenSettings}
+                    visible={menuOpen}
+                />
 
                 <StoriesSection stories={mockStories} colors={theme.colors} />
 
@@ -221,10 +245,12 @@ const createStyles = (colors: ReturnType<typeof useAppTheme>['theme']['colors'])
         safeArea: { flex: 1, backgroundColor: colors.background },
         content: { flexGrow: 1, paddingHorizontal: 20, paddingTop: 12, paddingBottom: 24 },
         header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+        appBlock: { flex: 1, paddingRight: 12 },
         eyebrow: { fontSize: 11, fontWeight: '800', letterSpacing: 1.1 },
         title: { marginTop: 4, fontSize: 24, fontWeight: '800' },
-        backButton: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderRadius: 14 },
-        backButtonText: { fontSize: 20, fontWeight: '700' },
+        headerActions: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+        iconButton: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderRadius: 14, backgroundColor: colors.surface },
+        iconButtonText: { fontSize: 18, fontWeight: '700' },
         sectionTitleRow: { marginTop: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
         sectionTitle: { fontSize: 17, fontWeight: '800' },
         sectionSubtitle: { fontSize: 12, fontWeight: '700' },

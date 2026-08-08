@@ -20,6 +20,10 @@ export type RootStackParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+/**
+ * Centralise la navigation de l’application et déclare les écrans accessibles.
+ * Cette fonction prépare aussi le thème visuel de React Navigation pour qu’il suive la palette Famio.
+ */
 export function AppNavigator() {
   const { theme } = useAppTheme();
   // On conserve les valeurs par défaut de React Navigation adaptées au mode actif.

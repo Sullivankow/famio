@@ -14,6 +14,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { type AppColors, useAppTheme } from '../theme/ThemeContext';
 
+/**
+ * Affiche le formulaire d’inscription avec validation simple avant la connexion au service d’authentification.
+ */
 export function SignUpScreen() {
   const { theme } = useAppTheme();
   const navigation = useNavigation();
@@ -147,6 +150,9 @@ type FieldProps = Readonly<{
   value: string;
 }>;
 
+/**
+ * Rend un champ de formulaire réutilisable avec son libellé et son message d’erreur éventuel.
+ */
 function Field({ error, label, styles, ...inputProps }: FieldProps) {
   return (
     <View>
