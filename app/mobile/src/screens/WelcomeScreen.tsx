@@ -1,7 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { type AppColors, useAppTheme } from '../theme/ThemeContext';
+
 export function WelcomeScreen() {
+  const { theme } = useAppTheme();
+  const styles = createStyles(theme.colors);
+
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
       <View style={styles.container}>
@@ -18,10 +23,10 @@ export function WelcomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#FFF8F4'
+    backgroundColor: colors.background,
   },
   container: {
     flex: 1,
@@ -35,22 +40,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 28,
-    backgroundColor: '#E8754D',
-    shadowColor: '#A74E30',
+    backgroundColor: colors.primary,
+    shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.18,
     shadowRadius: 18,
     elevation: 6
   },
   logoText: {
-    color: '#FFFFFF',
+    color: colors.onPrimary,
     fontSize: 52,
     fontWeight: '800',
     lineHeight: 62
   },
   title: {
     marginTop: 24,
-    color: '#2C1C17',
+    color: colors.textPrimary,
     fontSize: 38,
     fontWeight: '800',
     letterSpacing: -1
@@ -58,7 +63,7 @@ const styles = StyleSheet.create({
   subtitle: {
     maxWidth: 300,
     marginTop: 12,
-    color: '#725F58',
+    color: colors.textSecondary,
     fontSize: 17,
     lineHeight: 25,
     textAlign: 'center'
@@ -69,8 +74,8 @@ const styles = StyleSheet.create({
     paddingVertical: 9,
     overflow: 'hidden',
     borderRadius: 999,
-    backgroundColor: '#F8DED3',
-    color: '#A64D2D',
+    backgroundColor: colors.primarySoft,
+    color: colors.primaryPressed,
     fontSize: 14,
     fontWeight: '700'
   }
