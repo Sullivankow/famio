@@ -73,7 +73,7 @@ export function WelcomeScreen() {
           </Pressable>
           <Pressable
             accessibilityRole="button"
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => navigation.navigate('Main')}
             style={({ pressed }) => [styles.secondaryButton, pressed && styles.secondaryButtonPressed]}
           >
             <Text style={styles.secondaryButtonText}>Voir la home</Text>
